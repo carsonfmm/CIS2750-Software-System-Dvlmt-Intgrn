@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GPS Data Viewer</title>
+    <style>
+      table {
+        border: solid 1px #aaa999;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      table tr th {
+        border: solid 1px #aaa999;
+      }
+      table tr td {
+        border: solid 1px #aaa999;
+      }
+    </style>
+    <style>
+      table {text-align: center;}
+      h1 {text-align: center;}
+      h2 {text-align: center;}
+      h4 {text-align: center;}
+      .tab {
+        tab-size: 2;
+      }
+    </style>
+    <style>
+      div.ex1 {
+        height: 150px;
+        overflow: scroll;
+      }
+      div.ex5 {
+        height: 150px;
+        width: 350px;
+        overflow: scroll;
+      }
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .right_header {
+        position: absolute;
+        right: 0;
+      }
+      .left_header {
+        position: absolute;
+        left: 0;
+      }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+    <br>
+  </div>
+  <b><h1 style="font-family:verdana">GPS Data Viewer</h1></b>
+  <hr>
+    <b><h1 style="font-family:verdana">File Log Panel</h1></b>
+    <br>
+    <div id="table-container">
+      <div class="ex1">
+        <table id="main-table" cellspacing="0">
+        </table>
+      </div>
+      <br>
+      <form ref='uploadForm'
+      id='uploadForm'
+        action='/upload'
+        method='post'
+        encType="multipart/form-data">
+        <div class="form-group">
+          <input type="file" name="uploadFile" class="btn btn-secondary">
+          <input type='submit' value='Upload file' class="btn btn-secondary">
+        </div>
+      </form>
+    <hr>
+    <h1 style="font-family:verdana">GPX View Panel</h1>
+    <h3 style="font-family:verdana">File Names:</h3>
+    <label for="files">Choose a file:</label>
+    <select id="select-container" >
+    </select>
+    <br>
+    <br>
+    <div class="ex5" class="center">
+      <table id="second-table" class="center">
+    </table>
+    </div>
+    <br>
+    <br>
+    <label for="files">Choose a route/track from file:</label>
+    <select id="select-container2" >
+    <h3 style="font-family:verdana">Rename:</h3>
+    <br>
+    </select>
+    <br>
+    <br>
+    <button id="button_other_data">&nbsp&nbspShow Other Data&nbsp&nbsp</button>
+    <br>
+    <br>
+      <label for="files">Enter a new name:</label>
+      <form id="button_rename">
+        <input type="text" placeholder="Type here..." id="renamer">
+        <button type="button" id="renamer1" >Enter</button>
+      </form>
+    <hr>
+    <b><h1 style="font-family:verdana">Create a GPX Document</h1></b>
+    <form id="create_gpx_doc">
+      <br>
+      <label for="fname">File Name:</label>
+      <input type="text" placeholder="Type here..." id="file_name_new"><br><br>
+      <button type="button" id="final_button" >Create GPX</button>
+    </form>
+    <hr>
+    <b><h1 style="font-family:verdana">Add Route</h1></b>
+    <h3 style="font-family:verdana">File Names:</h3>
+    <label for="files">Choose a file:</label>
+    <select id="select-container3" >
+    </select>
+    <br>
+    <br>
+    <label for="fname">Route Name:</label>
+    <input type="text" id="route_new_name" name="route_new_name"><br><br>
+    <h3 style="font-family:verdana">Enter waypoint information:</h3><br>
+    <label for="fname">Latitude:</label>
+    <input type="text" id="new_waypoint_lat" name="fname"><br><br>
+    <label for="fname">Longitude:</label>
+    <input type="text" id="new_waypoint_lon" name="fname"><br><br>
+    <button type="button" id="add_waypoint" >Add waypoint</button><br><br>
+    <button type="button" id="add_route" >Add route</button>
+    <hr>
+    <b><h1 style="font-family:verdana">Find Path Between</h1></b>
+      <label for="fname">Start Latitude:</label>
+      <input type="text" id="start_lat" name="start_lat"><br><br>
+      <label for="fname">Start Longitude:</label>
+      <input type="text" id="start_lon" name="start_lon"><br><br>
+      <label for="fname">End Latitude:</label>
+      <input type="text" id="end_lat" name="end_lat"><br><br>
+      <label for="fname">End Longitude:</label>
+      <input type="text" id="end_lon" name="end_lon"><br><br>
+      <label for="fname">Delta:</label>
+      <input type="text" id="delta" name="delta"><br><br>
+      <button type="button" id="find_path" >Find Path</button>
+    <hr>
+    <h2 style="font-family:verdana">Paths Between:</h2>
+    <table id="third_table" class="center">
+    </table>
+    <br>
+    <br>
+    <br>
+
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
