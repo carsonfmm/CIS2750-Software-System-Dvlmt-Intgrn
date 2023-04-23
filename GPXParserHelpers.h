@@ -2,7 +2,6 @@
 #include "LinkedListAPI.h"
 
 // Name: Carson Mifsud
-// Student ID: 1089936
 // Date: 2021-03-11
 // Description: Headers for helper functions
 
