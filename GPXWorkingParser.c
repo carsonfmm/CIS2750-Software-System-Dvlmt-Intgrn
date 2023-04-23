@@ -3,7 +3,6 @@
 #include "GPXParserHelpers.h"
 
 // Name: Carson Mifsud
-// Student ID: 1089936
 // Date: 2021-03-11
 // Description: A parser for the GPX format. Program also includes several functions to track the amount of certain tags and attributes present in the given GPX file.
 
